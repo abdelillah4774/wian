@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiam ✨</title>
+
+<style>
+:root{
+  --pink:#ff7eb3;
+  --purple:#8e2de2;
+  --glass:#ffffff20;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#1a002a,#050010);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+.bg-glow{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,#ff7eb340,transparent 40%),
+    radial-gradient(circle at 80% 30%,#8e2de240,transparent 40%);
+  z-index:-1;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:100px 16px 40px;
+}
+.hero h1{
+  font-size:clamp(42px,8vw,64px);
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#ff7eb3,#8e2de2);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  max-width:600px;
+  margin:15px auto;
+  font-size:16px;
+  opacity:.9;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+  padding:20px;
+}
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(15px);
+  border-radius:26px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 20px 40px #00000080;
+  transition:.5s;
+}
+.card:hover{
+  transform:translateY(-10px);
+}
+.card h3{
+  color:#ffb3d9;
+}
+.card p{
+  font-size:14px;
+  opacity:.85;
+}
+.card button{
+  margin-top:14px;
+  padding:10px 22px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(135deg,#ff7eb3,#8e2de2);
+  color:white;
+  cursor:pointer;
+}
+
+/* FOOTER */
+.footer{
+  padding:30px 16px 60px;
+  display:flex;
+  justify-content:center;
+}
+.footer button{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:#ffffff25;
+  backdrop-filter:blur(10px);
+  color:white;
+  font-size:15px;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:#000000c0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+.popup.active{display:flex;}
+.box{
+  background:linear-gradient(135deg,#ff7eb3,#8e2de2);
+  padding:28px;
+  border-radius:30px;
+  max-width:90%;
+  text-align:center;
+}
+.close{
+  cursor:pointer;
+  float:right;
+}
+
+/* SECRET PAGE */
+.secret{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at top,#2a0040,#050010);
+  z-index:20;
+}
+.secret.active{display:flex;}
+
+.secret-box{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  padding:30px;
+  border-radius:30px;
+  max-width:92%;
+  text-align:center;
+}
+.secret-box img{
+  width:100%;
+  max-width:320px;
+  border-radius:20px;
+  margin:20px 0;
+  box-shadow:0 20px 40px #000;
+}
+.secret-box p{
+  font-size:15px;
+  line-height:1.6;
+}
+
+/* MOBILE TWEAKS */
+@media(max-width:480px){
+  .card:hover{transform:none;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-glow"></div>
+
+<section class="hero">
+  <h1>Wiam ✨</h1>
+  <p>
+    site ب مناسبة دخول 2026  
+    و حيث عرفنا بعضياتنا 🌸
+  </p>
+</section>
+
+<section class="cards">
+  <div class="card">
+    <h3>💌 كلمة زوينة</h3>
+    <p>hdra men l9lb </p>
+    <button onclick="msg()">شوف</button>
+  </div>
+
+  <div class="card">
+    <h3>I L V U</h3>
+    <p></p>
+    <button onclick="wish()">فتح</button>
+  </div>
+
+  <div class="card">
+    <h3>🎁 مفاجأة</h3>
+    <p></p>
+    <button onclick="surprise()">كشف</button>
+  </div>
+</section>
+
+<div class="footer">
+  <button onclick="openSecret()">🔒 الصفحة السرية</button>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="box">
+    <span class="close" onclick="closePop()">✖</span>
+    <p id="text"></p>
+  </div>
+</div>
+
+<!-- SECRET -->
+<div class="secret" id="secret">
+  <div class="secret-box">
+    <h2>😈 Surprise</h2>
+
+    <img src="https://c.top4top.io/p_3652epe6h1.jpg" alt="surprise">
+
+    <p>
+      هههههه مسكينة كتسنى مفاجأة زوينة 🤣   
+      هههههه غير ضاحك معاك 🤍  
+       🌸
+    </p>
+
+    <button onclick="closeSecret()">رجوع</button>
+  </div>
+</div>
+
+<script>
+function msg(){
+  popup.classList.add("active");
+  text.innerText="الله يسهل عليك و يخليك ليا ديما فرحانة 🤍";
+}
+function wish(){
+  popup.classList.add("active");
+  text.innerText="نتمنى ليك راحة البال و أيام زوينين 🌙";
+}
+function surprise(){
+  popup.classList.add("active");
+  text.innerText="المفاجأة فالصفحة السرية Wlknn 9lbi 3la code bohdk ";
+}
+function closePop(){
+  popup.classList.remove("active");
+}
+
+function openSecret(){
+  let pass=prompt("دخل الكود:");
+  if(pass==="kanbghek"){
+    secret.classList.add("active");
+  }else{
+    alert("الكود ما صحيحش");
+  }
+}
+function closeSecret(){
+  secret.classList.remove("active");
+}
+</script>
+
+</body>
+</html>
